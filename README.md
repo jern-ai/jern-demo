@@ -18,23 +18,44 @@ setup is one `jern.json`, one baseline, and one workflow.
 
 ## What the pull requests demonstrate
 
-Each of these is an open (or linked) pull request in this repository:
+Both are open pull requests in this repository:
 
-1. **Editing `CONVENTIONS.md` turns the check red.** The file rides in the
-   system prompt, so changing it changes what the agent would do. The check
-   fails with the exact recorded-vs-actual difference — no model was called
-   to find that out.
-2. **A pull request cannot weaken the rules that judge it.** One PR widens
-   `edits_within` in its own `jern.json` to allow edits anywhere. The
-   comment still shows the protected baseline from `main` in force: the
-   widened rule is *not* what governed the run.
-3. **Every run leaves a receipt** — model calls against budget, tools used,
-   files actually written, policy decisions, and the trace they came from.
+1. **[#3 — changing the agent's configuration turns the check red.](../../pull/3)**
+   It switches the test runner in `jern.json`. The agent would now run a
+   different command, so the check fails with the exact difference:
+
+   ```
+   diverged from the recording at tool call #11.
+     recorded: …"command":"python3 -m unittest discover -s tests -t ."}}
+     actual:   …"command":"python3 -m unittest discover -s tests -t . -v"}}
+   ```
+
+   No model was called to find that out.
+
+2. **[#2 — a pull request cannot weaken the rules that judge it.](../../pull/2)**
+   It widens `edits_within` in its own `jern.json` *and deletes the
+   protected baseline*. The check's comment still shows the baseline, read
+   from the base commit, in force. Nothing about the agent's behavior
+   changed, so the check itself is green — the point is in the policy
+   provenance, not the verdict.
+
+Every run also leaves a **receipt**: model calls against budget, tools used,
+files actually written, policy decisions, and the trace they came from.
+
+## What a golden check can and cannot see
+
+It re-executes the *agent* against the recording's model and tool results.
+So it catches changes to the agent, its configuration, and the policy — and
+it does **not** catch a change to a file the agent reads during the run.
+Editing [`CONVENTIONS.md`](CONVENTIONS.md) changes what a live run would
+see, but the replay still answers that `read_file` from the recording.
+Re-record to capture it. (We learned this the honest way: the first version
+of this demo claimed otherwise, and the pull request went green.)
 
 ## Try it locally
 
 ```bash
-curl -fsSL https://jern.ai/install.sh | sh     # or: JERN_VERSION=0.14.1 …
+curl -fsSL https://jern.ai/install.sh | sh     # or: JERN_VERSION=0.14.3 …
 jern policy          # every rule in force, and where each came from
 jern golden check    # replay the recording — offline, no API key
 jern golden list
