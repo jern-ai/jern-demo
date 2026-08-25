@@ -1,0 +1,10 @@
+{
+  "task": "fix the failing test in tests/test_temperature.py",
+  "recorded_with": "0.14.0",
+  "assert": {
+    "edits_within": ["src/"],
+    "no_tools": ["write_file"],
+    "max_files_edited": 1,
+    "max_llm_calls": 8
+  }
+}

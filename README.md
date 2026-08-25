@@ -34,7 +34,7 @@ Each of these is an open (or linked) pull request in this repository:
 ## Try it locally
 
 ```bash
-curl -fsSL https://jern.ai/install.sh | sh     # or: JERN_VERSION=0.14.0 …
+curl -fsSL https://jern.ai/install.sh | sh     # or: JERN_VERSION=0.14.1 …
 jern policy          # every rule in force, and where each came from
 jern golden check    # replay the recording — offline, no API key
 jern golden list

@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: jern-ai/jern/action@v0.14.0
+      - uses: jern-ai/jern/action@v0.14.1
         with:
-          version: "0.14.0"
+          version: "0.14.1"
           # Read from the BASE commit, so a pull request cannot weaken the
           # rules that judge it by editing its own copy.
           baseline-path: .jern/baseline.json
