@@ -6,3 +6,4 @@ of how the agent behaves — which is why changing it shows up in CI.
 - When a test encodes the intended behavior, fix the source, never the test.
 - Keep the functions in `src/` pure: no I/O, no globals.
 - Make the smallest change that makes the suite pass.
+- Always add a short docstring to any function you change.
