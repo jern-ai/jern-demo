@@ -1,0 +1,6 @@
+# What "correct behavior" means, and the rules that enforce it, should not be
+# self-served by the same pull request that changes behavior.
+/.jern/golden/     @ademar
+/.jern/baseline.json  @ademar
+/.github/          @ademar
+/CONVENTIONS.md    @ademar

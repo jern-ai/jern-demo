@@ -1,0 +1,6 @@
+{
+  "//": "The protected baseline. CI reads this from the BASE commit, so a pull request cannot weaken it by editing its own copy.",
+  "policy": {
+    "edits_within": ["src/", "tests/"]
+  }
+}

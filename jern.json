@@ -1,0 +1,11 @@
+{
+  "test_command": "python3 -m unittest discover -s tests -t .",
+
+  "policy": {
+    "edits_within": ["src/", "tests/"],
+    "shell_allow": ["python3"],
+    "deny": ["mcp__*"]
+  },
+
+  "budget": { "llm_calls": 12 }
+}

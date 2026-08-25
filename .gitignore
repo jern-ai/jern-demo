@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.jern/trace-*.jsonl
+.jern/sessions/
+

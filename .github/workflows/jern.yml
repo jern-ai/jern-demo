@@ -1,0 +1,28 @@
+name: agent behavior
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  jern:
+    name: golden sessions + policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jern-ai/jern/action@v0.14.0
+        with:
+          version: "0.14.0"
+          # Read from the BASE commit, so a pull request cannot weaken the
+          # rules that judge it by editing its own copy.
+          baseline-path: .jern/baseline.json
+          # This repository's own policy grants python3 to the agent. Grants
+          # can loosen approvals, so an unattended run only applies them when
+          # the workflow pins their digest — which lives here, outside the
+          # pull request's reach.
+          policy-trust: "1215f92c83157c4908cc6141ef68daa9a28e0c0567c41877b8fbdb27ab4fc4f2"
