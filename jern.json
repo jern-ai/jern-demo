@@ -2,7 +2,10 @@
   "test_command": "python3 -m unittest discover -s tests -t .",
   "policy": {
     "edits_within": [
-      "."
+      "src/",
+      "tests/",
+      "scripts/",
+      "docs/"
     ],
     "shell_allow": [
       "python3"
