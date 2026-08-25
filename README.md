@@ -1,5 +1,11 @@
 # jern demo — an agent under repository rules
 
+![A terminal session: the rules in force, a golden session replaying clean, one
+line of jern.json changed, and the same check failing with the exact
+recorded-vs-actual difference](https://jern.ai/demo.gif)
+
+*Real output from this repository — offline, no model called.*
+
 A deliberately small Python project that shows what
 [jern](https://jern.ai) adds to a coding agent: **rules the repository
 enforces**, a **receipt** for every run, and a **CI gate that catches
@@ -55,7 +61,7 @@ of this demo claimed otherwise, and the pull request went green.)
 ## Try it locally
 
 ```bash
-curl -fsSL https://jern.ai/install.sh | sh     # or: JERN_VERSION=0.14.3 …
+curl -fsSL https://jern.ai/install.sh | sh     # or: JERN_VERSION=0.14.4 …
 jern policy          # every rule in force, and where each came from
 jern golden check    # replay the recording — offline, no API key
 jern golden list
