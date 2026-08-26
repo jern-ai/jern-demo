@@ -1,0 +1,46 @@
+name: governed live repair
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  repair:
+    name: repair temperature conversion
+    environment: governed-live
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: jern-ai/jern/action@1803fb09e9422343eb7571f4a2ff73295c2430ec
+        id: jern
+        with:
+          version: "0.14.5"
+          live-task: >-
+            Fix the failing Fahrenheit-to-Celsius conversion test. Follow
+            CONVENTIONS.md, change source rather than tests, and make the
+            smallest correction that passes the existing suite.
+          live-token-budget: "20000"
+          baseline-path: .github/jern-live-baseline.json
+          tests: "false"
+          golden: "false"
+          comment: "false"
+          cloud-upload: "true"
+
+      - name: Verify governed result
+        env:
+          LIVE_OUTCOME: ${{ steps.jern.outputs.live-outcome }}
+          CLOUD_RUNS: ${{ steps.jern.outputs.cloud-runs }}
+        run: |
+          set -euo pipefail
+          test "$LIVE_OUTCOME" = "success"
+          test -n "$CLOUD_RUNS"
+          python3 -m unittest discover -s tests -t .
+          git diff --exit-code -- tests
+          git diff -- src/temperature.py
+          echo "Governed live repair recorded as Jern Cloud run: $CLOUD_RUNS"

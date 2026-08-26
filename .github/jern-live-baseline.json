@@ -1,0 +1,9 @@
+{
+  "policy": {
+    "edits_within": ["src/"],
+    "shell_allow": ["python3 -m unittest discover -s tests -t ."],
+    "allow": ["edit_file", "write_file"],
+    "deny": ["mcp__*"],
+    "memory": "deny"
+  }
+}
