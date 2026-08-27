@@ -25,7 +25,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: jern-ai/jern/action@ceef680f5604a868113755569f5ab5b829f15bd4
+      - uses: jern-ai/jern/action@9c09b30f612073b343da6292b227ad6b48e23444
         id: jern
         with:
           version: "0.14.5"
