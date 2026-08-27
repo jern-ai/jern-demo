@@ -25,7 +25,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: jern-ai/jern/action@9c09b30f612073b343da6292b227ad6b48e23444
+      - uses: jern-ai/jern/action@f3df9187a91c9d1f3847bc7748d76cdb86efb602
         id: jern
         with:
           version: "0.14.5"
@@ -49,6 +49,7 @@ jobs:
           test -n "$CLOUD_RUNS"
           test -n "$PULL_REQUEST"
           python3 -m unittest discover -s tests -t .
-          git diff --exit-code -- tests
-          git diff --exit-code "$GITHUB_SHA" HEAD -- src/temperature.py
+          mapfile -t changed_files < <(git diff --name-only "$GITHUB_SHA" HEAD)
+          test "${#changed_files[@]}" -eq 1
+          test "${changed_files[0]}" = "src/temperature.py"
           echo "Governed issue delivered as $PULL_REQUEST with Jern Cloud run: $CLOUD_RUNS"
