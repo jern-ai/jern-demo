@@ -1,30 +1,36 @@
-name: governed live repair
+name: governed issue delivery
 
 on:
   workflow_dispatch:
+    inputs:
+      issue_number:
+        description: GitHub issue to resolve
+        required: true
+        type: string
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
+  pull-requests: write
 
 jobs:
   repair:
-    name: repair temperature conversion
+    name: issue to pull request
     environment: governed-live
     runs-on: ubuntu-latest
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-      - uses: jern-ai/jern/action@1803fb09e9422343eb7571f4a2ff73295c2430ec
+      - uses: jern-ai/jern/action@ceef680f5604a868113755569f5ab5b829f15bd4
         id: jern
         with:
           version: "0.14.5"
-          live-task: >-
-            Fix the failing Fahrenheit-to-Celsius conversion test. Follow
-            CONVENTIONS.md, change source rather than tests, and make the
-            smallest correction that passes the existing suite.
+          live-issue: ${{ inputs.issue_number }}
+          live-delivery: "pull-request"
           live-token-budget: "20000"
           baseline-path: .github/jern-live-baseline.json
           tests: "false"
@@ -36,11 +42,13 @@ jobs:
         env:
           LIVE_OUTCOME: ${{ steps.jern.outputs.live-outcome }}
           CLOUD_RUNS: ${{ steps.jern.outputs.cloud-runs }}
+          PULL_REQUEST: ${{ steps.jern.outputs.live-pull-request }}
         run: |
           set -euo pipefail
           test "$LIVE_OUTCOME" = "success"
           test -n "$CLOUD_RUNS"
+          test -n "$PULL_REQUEST"
           python3 -m unittest discover -s tests -t .
           git diff --exit-code -- tests
-          git diff -- src/temperature.py
-          echo "Governed live repair recorded as Jern Cloud run: $CLOUD_RUNS"
+          git diff --exit-code "$GITHUB_SHA" HEAD -- src/temperature.py
+          echo "Governed issue delivered as $PULL_REQUEST with Jern Cloud run: $CLOUD_RUNS"
