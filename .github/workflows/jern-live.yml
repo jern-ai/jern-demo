@@ -7,6 +7,10 @@ on:
         description: GitHub issue to resolve
         required: true
         type: string
+      task_id:
+        description: Jern Cloud task identity
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -25,11 +29,12 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: jern-ai/jern/action@f3df9187a91c9d1f3847bc7748d76cdb86efb602
+      - uses: jern-ai/jern/action@44a9e66
         id: jern
         with:
           version: "0.14.5"
           live-issue: ${{ inputs.issue_number }}
+          live-task-id: ${{ inputs.task_id }}
           live-delivery: "pull-request"
           live-token-budget: "20000"
           baseline-path: .github/jern-live-baseline.json
