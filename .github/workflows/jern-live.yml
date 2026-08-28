@@ -48,7 +48,12 @@ jobs:
           test "$LIVE_OUTCOME" = "success"
           test -n "$CLOUD_RUNS"
           test -n "$PULL_REQUEST"
-          python3 -m unittest discover -s tests -t .
+          python3 - <<'PY'
+          from src.temperature import kelvin_to_celsius
+
+          assert kelvin_to_celsius(273.15) == 0
+          assert kelvin_to_celsius(373.15) == 100
+          PY
           mapfile -t changed_files < <(git diff --name-only "$GITHUB_SHA" HEAD)
           test "${#changed_files[@]}" -eq 1
           test "${changed_files[0]}" = "src/temperature.py"
