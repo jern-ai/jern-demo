@@ -1,11 +1,15 @@
-name: governed issue delivery
+name: governed task delivery
 
 on:
   workflow_dispatch:
     inputs:
+      task:
+        description: Task for the governed agent (set task or issue_number)
+        required: false
+        type: string
       issue_number:
-        description: GitHub issue to resolve
-        required: true
+        description: GitHub issue to resolve (set issue_number or task)
+        required: false
         type: string
       task_id:
         description: Jern Cloud task identity
@@ -19,7 +23,7 @@ permissions:
 
 jobs:
   repair:
-    name: issue to pull request
+    name: task to pull request
     environment: governed-live
     runs-on: ubuntu-latest
     env:
@@ -33,6 +37,7 @@ jobs:
         id: jern
         with:
           version: "0.14.5"
+          live-task: ${{ inputs.task }}
           live-issue: ${{ inputs.issue_number }}
           live-task-id: ${{ inputs.task_id }}
           live-delivery: "pull-request"
@@ -53,13 +58,6 @@ jobs:
           test "$LIVE_OUTCOME" = "success"
           test -n "$CLOUD_RUNS"
           test -n "$PULL_REQUEST"
-          python3 - <<'PY'
-          from src.temperature import kelvin_to_celsius
-
-          assert kelvin_to_celsius(273.15) == 0
-          assert kelvin_to_celsius(373.15) == 100
-          PY
           mapfile -t changed_files < <(git diff --name-only "$GITHUB_SHA" HEAD)
-          test "${#changed_files[@]}" -eq 1
-          test "${changed_files[0]}" = "src/temperature.py"
-          echo "Governed issue delivered as $PULL_REQUEST with Jern Cloud run: $CLOUD_RUNS"
+          test "${#changed_files[@]}" -gt 0
+          echo "Governed task delivered as $PULL_REQUEST with Jern Cloud run: $CLOUD_RUNS"
