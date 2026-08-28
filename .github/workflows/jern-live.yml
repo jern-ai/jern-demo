@@ -29,7 +29,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: jern-ai/jern/action@44a9e66
+      - uses: jern-ai/jern/action@44a9e660ec17dcdf409dc8be9f0f32e79989b546
         id: jern
         with:
           version: "0.14.5"
