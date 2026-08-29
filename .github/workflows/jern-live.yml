@@ -1,4 +1,4 @@
-name: governed task delivery
+name: governed Jern task
 
 on:
   workflow_dispatch:
@@ -13,8 +13,16 @@ on:
         type: string
       task_id:
         description: Jern Cloud task identity
-        required: true
+        required: false
         type: string
+      agent_kind:
+        description: Agent runtime selected by Jern Cloud
+        required: false
+        default: jern-native
+        type: choice
+        options:
+          - jern-native
+          - codex
 
 permissions:
   contents: write
@@ -22,42 +30,36 @@ permissions:
   pull-requests: write
 
 jobs:
-  repair:
-    name: task to pull request
+  agent:
+    name: governed agent
     environment: governed-live
     runs-on: ubuntu-latest
     env:
-      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ inputs.agent_kind == 'jern-native' && secrets.ANTHROPIC_API_KEY || '' }}
+      OPENAI_API_KEY: ${{ inputs.agent_kind == 'codex' && secrets.OPENAI_API_KEY || '' }}
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - uses: jern-ai/jern/action@44a9e660ec17dcdf409dc8be9f0f32e79989b546
-        id: jern
+      - name: Install supervised Codex adapter
+        if: inputs.agent_kind == 'codex'
+        run: npm install --global @openai/codex@0.150.1
+
+      - uses: jern-ai/jern/action@f104df862748bc9c15cac483b6545a549e5680d4
         with:
           version: "0.14.5"
           live-task: ${{ inputs.task }}
           live-issue: ${{ inputs.issue_number }}
           live-task-id: ${{ inputs.task_id }}
+          live-agent: ${{ inputs.agent_kind }}
+          live-agent-version: ${{ inputs.agent_kind == 'codex' && '0.150.1' || '' }}
+          live-timeout-minutes: "30"
           live-delivery: "pull-request"
           live-token-budget: "20000"
           baseline-path: .github/jern-live-baseline.json
+          policy-trust: "c271355cc47c444daacb713f0f6a07dee5de860ba56ebc438b2dfdc02a4e129c"
           tests: "false"
           golden: "false"
           comment: "false"
           cloud-upload: "true"
-
-      - name: Verify governed result
-        env:
-          LIVE_OUTCOME: ${{ steps.jern.outputs.live-outcome }}
-          CLOUD_RUNS: ${{ steps.jern.outputs.cloud-runs }}
-          PULL_REQUEST: ${{ steps.jern.outputs.live-pull-request }}
-        run: |
-          set -euo pipefail
-          test "$LIVE_OUTCOME" = "success"
-          test -n "$CLOUD_RUNS"
-          test -n "$PULL_REQUEST"
-          mapfile -t changed_files < <(git diff --name-only "$GITHUB_SHA" HEAD)
-          test "${#changed_files[@]}" -gt 0
-          echo "Governed task delivered as $PULL_REQUEST with Jern Cloud run: $CLOUD_RUNS"
