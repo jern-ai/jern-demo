@@ -46,7 +46,7 @@ jobs:
         if: inputs.agent_kind == 'codex'
         run: npm install --global @openai/codex@0.150.1
 
-      - uses: jern-ai/jern/action@67d4ae9ee7b880f8b2e905d33a1852c63deff000
+      - uses: jern-ai/jern/action@4c8dba5e1f0c6365662d843ef8a4b922a75ebebe
         with:
           version: "0.14.5"
           live-task: ${{ inputs.task }}
