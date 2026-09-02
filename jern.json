@@ -6,5 +6,5 @@
     "deny": ["mcp__*"]
   },
 
-  "budget": { "llm_calls": 12 }
+  "budget": { "llm_calls": 30 }
 }
