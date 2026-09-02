@@ -15,3 +15,11 @@ def celsius_to_kelvin(celsius):
 
 def kelvin_to_celsius(kelvin):
     return kelvin - 273.15
+
+
+def fahrenheit_to_kelvin(fahrenheit):
+    return celsius_to_kelvin(fahrenheit_to_celsius(fahrenheit))
+
+
+def kelvin_to_fahrenheit(kelvin):
+    return celsius_to_fahrenheit(kelvin_to_celsius(kelvin))
