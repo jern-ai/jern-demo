@@ -3,7 +3,6 @@
 
   "policy": {
     "edits_within": ["src/", "tests/"],
-    "shell_allow": ["python3"],
     "deny": ["mcp__*"]
   },
 
