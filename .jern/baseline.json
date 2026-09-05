@@ -18,7 +18,9 @@
       "python3"
     ]
   },
-  "services": [
-    "postgres:16"
-  ]
+  "environment": {
+    "services": [
+      "postgres:16"
+    ]
+  }
 }
