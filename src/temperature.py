@@ -1,10 +1,15 @@
 """Temperature conversions."""
 
+import os
+
+
+def get_pgdatabase():
+    return os.environ.get("PGDATABASE")
+
 
 def celsius_to_fahrenheit(celsius):
     return celsius * 9 / 5 + 32
 
 
 def fahrenheit_to_celsius(fahrenheit):
-    # Wrong: the 32-degree offset is missing.
-    return fahrenheit * 5 / 9
+    return (fahrenheit - 32) * 5 / 9
