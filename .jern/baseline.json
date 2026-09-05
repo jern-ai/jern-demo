@@ -21,6 +21,9 @@
   "environment": {
     "services": [
       "postgres:16"
+    ],
+    "network_allow": [
+      "docs.python.org"
     ]
   }
 }
