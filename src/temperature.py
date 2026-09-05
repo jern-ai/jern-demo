@@ -1,4 +1,9 @@
-"""Temperature conversions."""
+"""Temperature conversions between Celsius and Fahrenheit.
+
+Provides:
+- celsius_to_fahrenheit: convert a Celsius value to Fahrenheit.
+- fahrenheit_to_celsius: convert a Fahrenheit value to Celsius.
+"""
 
 
 def celsius_to_fahrenheit(celsius):
@@ -6,5 +11,4 @@ def celsius_to_fahrenheit(celsius):
 
 
 def fahrenheit_to_celsius(fahrenheit):
-    # Wrong: the 32-degree offset is missing.
-    return fahrenheit * 5 / 9
+    return (fahrenheit - 32) * 5 / 9
