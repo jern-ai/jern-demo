@@ -1,6 +1,24 @@
 {
-  "//": "The protected baseline. CI reads this from the BASE commit, so a pull request cannot weaken it by editing its own copy.",
+  "//": "The protected baseline. The Jern Action reads it from the base commit of a pull request, and Jern Cloud pins it by digest for the life of a session, so neither a pull request nor a session can weaken it.",
   "policy": {
-    "edits_within": ["src/", "tests/"]
-  }
+    "allow": [
+      "edit_file",
+      "write_file"
+    ],
+    "deny": [
+      "mcp__*"
+    ],
+    "edits_within": [
+      "src/",
+      "tests/"
+    ],
+    "memory": "deny",
+    "shell_allow": [
+      "python3 -m unittest discover -s tests -t .",
+      "python3"
+    ]
+  },
+  "services": [
+    "postgres:16"
+  ]
 }

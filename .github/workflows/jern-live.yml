@@ -57,7 +57,7 @@ jobs:
           live-timeout-minutes: "30"
           live-delivery: "pull-request"
           live-token-budget: "20000"
-          baseline-path: .github/jern-live-baseline.json
+          baseline-path: .jern/baseline.json
           policy-trust: "b2b1943768ac0b1ced0bda99759da308242b0294210f33b7a36969e2ae105ce6"
           tests: "false"
           golden: "false"
