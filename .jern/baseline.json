@@ -3,10 +3,8 @@
   "policy": {
     "allow": [
       "edit_file",
-      "write_file"
-    ],
-    "deny": [
-      "mcp__*"
+      "write_file",
+      "mcp__jern__start_service"
     ],
     "edits_within": [
       "src/",
