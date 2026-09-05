@@ -10,7 +10,7 @@
       "src/",
       "tests/"
     ],
-    "memory": "deny",
+    "memory": "allow",
     "shell_allow": [
       "python3 -m unittest discover -s tests -t .",
       "python3"
