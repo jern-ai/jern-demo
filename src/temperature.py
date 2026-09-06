@@ -6,5 +6,8 @@ def celsius_to_fahrenheit(celsius):
 
 
 def fahrenheit_to_celsius(fahrenheit):
-    # Wrong: the 32-degree offset is missing.
-    return fahrenheit * 5 / 9
+    return (fahrenheit - 32) * 5 / 9
+
+
+def celsius_to_rankine(celsius):
+    return celsius * 9 / 5 + 491.67
