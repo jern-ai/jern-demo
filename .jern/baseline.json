@@ -8,7 +8,8 @@
       "mcp__jern__read_issue",
       "mcp__jern__list_issues",
       "mcp__jern__read_pull_request",
-      "mcp__jern__read_check_log"
+      "mcp__jern__read_check_log",
+      "mcp__jern__ask_human"
     ],
     "edits_within": [
       "src/",
