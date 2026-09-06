@@ -11,4 +11,5 @@ def fahrenheit_to_celsius(fahrenheit):
 
 
 def kelvin_to_celsius(kelvin):
+    """Convert a temperature from Kelvin to Celsius."""
     return kelvin - 273.15
