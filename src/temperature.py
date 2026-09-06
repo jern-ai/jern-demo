@@ -8,3 +8,7 @@ def celsius_to_fahrenheit(celsius):
 def fahrenheit_to_celsius(fahrenheit):
     # Wrong: the 32-degree offset is missing.
     return fahrenheit * 5 / 9
+
+
+def kelvin_to_celsius(kelvin):
+    return kelvin - 273.15
