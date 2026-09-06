@@ -6,5 +6,9 @@ def celsius_to_fahrenheit(celsius):
 
 
 def fahrenheit_to_celsius(fahrenheit):
-    # Wrong: the 32-degree offset is missing.
-    return fahrenheit * 5 / 9
+    return (fahrenheit - 32) * 5 / 9
+
+
+def celsius_to_kelvin(celsius):
+    """Convert a temperature from Celsius to Kelvin."""
+    return celsius + 273.15
