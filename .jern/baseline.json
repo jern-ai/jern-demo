@@ -16,6 +16,12 @@
       "src/",
       "tests/"
     ],
+    "protected_paths": [
+      ".jern/",
+      ".github/"
+    ],
+    "max_files_edited": 4,
+    "max_lines_changed": 200,
     "memory": "allow",
     "shell_allow": [
       "python3 -m unittest discover -s tests -t .",
