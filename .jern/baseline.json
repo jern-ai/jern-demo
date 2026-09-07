@@ -38,5 +38,6 @@
     "network_allow": [
       "docs.python.org"
     ]
-  }
+  },
+  "test_command": "python3 -m unittest discover -s tests -t . -k celsius"
 }
