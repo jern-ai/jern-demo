@@ -3,6 +3,8 @@
   "policy": {
     "allow": [
       "edit_file",
+      "edit_symbol",
+      "apply_patch",
       "write_file",
       "mcp__jern__start_service",
       "mcp__jern__read_issue",
