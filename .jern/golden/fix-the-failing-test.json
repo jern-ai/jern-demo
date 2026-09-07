@@ -1,6 +1,6 @@
 {
-  "task": "fix the failing test in tests/test_temperature.py",
-  "recorded_with": "0.15.3",
+  "task": "fix the failing test",
+  "recorded_with": "0.18.0",
   "assert": {
     "edits_within": [
       "src/"
