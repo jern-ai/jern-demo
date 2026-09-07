@@ -39,5 +39,5 @@
       "docs.python.org"
     ]
   },
-  "test_command": "python3 -m unittest discover -s tests -t . -k celsius"
+  "test_command": "python3 -m unittest discover -s tests -t . -k test_celsius_to_fahrenheit"
 }
