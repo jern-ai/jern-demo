@@ -9,10 +9,12 @@ from temperature import celsius_to_fahrenheit, fahrenheit_to_celsius
 
 class TemperatureTests(unittest.TestCase):
     def test_celsius_to_fahrenheit(self):
+        """Verify Celsius-to-Fahrenheit conversion."""
         self.assertEqual(celsius_to_fahrenheit(100), 212)
         self.assertEqual(celsius_to_fahrenheit(0), 32)
 
     def test_fahrenheit_to_celsius(self):
+        """Verify Fahrenheit-to-Celsius conversion."""
         self.assertEqual(fahrenheit_to_celsius(212), 100)
         self.assertEqual(fahrenheit_to_celsius(32), 0)
 
