@@ -1,4 +1,4 @@
-"""Temperature conversions."""
+"""Temperature conversions between Celsius and Fahrenheit."""
 
 
 def celsius_to_fahrenheit(celsius):
