@@ -1,9 +1,4 @@
-"""Temperature conversions between Celsius and Fahrenheit.
-
-Provides:
-    celsius_to_fahrenheit: convert a temperature from Celsius to Fahrenheit.
-    fahrenheit_to_celsius: convert a temperature from Fahrenheit to Celsius.
-"""
+"""Temperature conversions between Celsius and Fahrenheit."""
 
 
 def celsius_to_fahrenheit(celsius):
