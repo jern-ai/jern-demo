@@ -2,7 +2,7 @@
   "test_command": "python3 -m unittest discover -s tests -t .",
 
   "policy": {
-    "edits_within": ["src/", "tests/"]
+    "edits_within": ["src/", "tests/", "web/"]
   },
 
   "budget": { "llm_calls": 60 }
