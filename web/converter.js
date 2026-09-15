@@ -1,6 +1,6 @@
 // The page's only logic: read Fahrenheit, show Celsius.
 function fahrenheitToCelsius(fahrenheit) {
-  return fahrenheit - 32 * 5 / 9;
+  return (fahrenheit - 32) * 5 / 9;
 }
 
 document.getElementById("converter").addEventListener("submit", function (event) {
