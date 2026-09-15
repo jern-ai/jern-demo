@@ -5,5 +5,5 @@
     "edits_within": ["src/", "tests/"]
   },
 
-  "budget": { "llm_calls": 30 }
+  "budget": { "llm_calls": 60 }
 }
