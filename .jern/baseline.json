@@ -13,7 +13,9 @@
       "mcp__jern__read_check_log",
       "mcp__jern__ask_human",
       "mcp__jern__fetch_page",
-      "mcp__jern__package_info"
+      "mcp__jern__package_info",
+      "mcp__jern__recall_claims",
+      "mcp__jern__record_claim"
     ],
     "edits_within": [
       "src/",
