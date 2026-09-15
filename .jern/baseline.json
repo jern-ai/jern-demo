@@ -15,11 +15,22 @@
       "mcp__jern__fetch_page",
       "mcp__jern__package_info",
       "mcp__jern__recall_claims",
-      "mcp__jern__record_claim"
+      "mcp__jern__record_claim",
+      "mcp__jern__browser_open",
+      "mcp__jern__browser_read",
+      "mcp__jern__browser_click",
+      "mcp__jern__browser_type",
+      "mcp__jern__browser_press",
+      "mcp__jern__browser_wait",
+      "mcp__jern__browser_evaluate",
+      "mcp__jern__browser_screenshot",
+      "mcp__jern__browser_console",
+      "mcp__jern__browser_close"
     ],
     "edits_within": [
       "src/",
-      "tests/"
+      "tests/",
+      "web/"
     ],
     "protected_paths": [
       ".jern/",
